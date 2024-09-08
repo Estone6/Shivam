@@ -33,10 +33,10 @@ const Contact = () => {
     // Use EmailJS to send the email
     emailjs
       .send(
-        process.env.EMAILJS_SERVICE_ID!, // Replace with your EmailJS Service ID
-        process.env.EMAILJS_TEMPLATE_ID!, // Replace with your EmailJS Template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Replace with your EmailJS Service ID
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Replace with your EmailJS Template ID
         formData,
-        process.env.EMAILJS_USER_ID! // Replace with your EmailJS User ID
+        process.env.NEXT_PUBLIC_EMAILJS_USER_ID! // Replace with your EmailJS User ID
       )
       .then(
         (result) => {
