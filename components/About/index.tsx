@@ -29,13 +29,13 @@ const About = () => {
               className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/2"
             >
               <Image
-                src="/images/about/about-light-01.png"
+                src="/images/about/about-light-1.svg"
                 alt="About"
                 className="dark:hidden"
                 fill
               />
               <Image
-                src="/images/about/about-dark-01.png"
+                src="/images/about/about-light-1.svg"
                 alt="About"
                 className="hidden dark:block"
                 fill
@@ -141,7 +141,7 @@ const About = () => {
               <p>
                 Our courses are designed to integrate all essential skills required for a successful career in IT and tech. From foundational programming languages to advanced data analytics, you get access to a full spectrum of training materials and hands-on projects.
               </p>
-              <div>
+              {/* <div>
                 <a
                   href="#"
                   className="group mt-7.5 inline-flex items-center gap-2.5 text-black hover:text-primary dark:text-white dark:hover:text-primary"
@@ -158,7 +158,7 @@ const About = () => {
                     <path d="M10.4767 6.16701L6.00668 1.69701L7.18501 0.518677L13.6667 7.00034L7.18501 13.482L6.00668 12.3037L10.4767 7.83368H0.333344V6.16701H10.4767Z" />
                   </svg>
                 </a>
-              </div>
+              </div> */}
             </motion.div>
             <motion.div
               variants={{
@@ -179,13 +179,13 @@ const About = () => {
               className="animate_right relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/2"
             >
               <Image
-                src="./images/about/about-light-02.svg"
+                src="./images/about/about-light-2.svg"
                 alt="About"
                 className="dark:hidden"
                 fill
               />
               <Image
-                src="./images/about/about-dark-02.svg"
+                src="./images/about/about-light-2.svg"
                 alt="About"
                 className="hidden dark:block"
                 fill

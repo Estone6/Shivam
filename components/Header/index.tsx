@@ -36,23 +36,26 @@ const Header = () => {
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <a href="/">
-            <Image
-              src="/images/logo/logo-dark.svg"
-              alt="logo"
-              width={119.03}
-              height={30}
-              className="hidden w-full dark:block"
-            />
-            <Image
-              src="/images/logo/logo-light.svg"
-              alt="logo"
-              width={119.03}
-              height={30}
-              className="w-full dark:hidden"
-            />
-          </a>
-
+          <div className="flex justify-center items-center gap-2">
+            <a href="/">
+              <Image
+                src="/images/logo/logo-header.png"
+                alt="logo"
+                width={119.03}
+                height={30}
+                className="hidden w-full dark:block"
+              />
+              <Image
+                src="/images/logo/logo-header.png"
+                alt="logo"
+                width={119.03}
+                height={30}
+                className="w-full dark:hidden"
+              />
+            </a>
+            <div className="text-black dark:text-white text-2xl font-semibold"><a href="/">TechUnicorn</a></div>
+          </div>
+          
           {/* <!-- Hamburger Toggle BTN --> */}
           <button
             aria-label="hamburger Toggler"

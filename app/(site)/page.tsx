@@ -2,6 +2,7 @@ import About from "@/components/About";
 import Blog from "@/components/Blog";
 import Brands from "@/components/Brands";
 import Contact from "@/components/Contact";
+import Courses from "@/components/Courses";
 import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
 import Feature from "@/components/Features";
@@ -23,19 +24,20 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <LaunchingSoon />
-      {/* <Hero />
-      <Brands />
+      {/* <LaunchingSoon /> */}
+      <Hero />
+      {/* <Brands /> */}
       <Feature />
       <About />
       <FeaturesTab />
       <FunFact />
       <Integration />
+      {/* <Courses /> */}
       <CTA />
       <FAQ />
       <Testimonial />
-      <Pricing />
-      <Contact /> */}
+      {/* <Pricing /> */}
+      <Contact />
       {/* <Blog /> */}
     </main>
   );

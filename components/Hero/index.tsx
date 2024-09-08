@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const Hero = () => {
@@ -33,19 +34,21 @@ const Hero = () => {
               <div className="mt-10">
                 <form onSubmit={handleSubmit}>
                   <div className="flex flex-col gap-5 md:flex-row md:justify-between">
-                    <input
+                    {/* <input
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       type="text"
                       placeholder="Enter your email address"
                       className="rounded-full border border-stroke w-full md:w-[60%] px-6 py-2.5 shadow-solid-2 focus:border-primary focus:outline-none dark:border-strokedark dark:bg-black dark:shadow-none dark:focus:border-primary"
-                    />
-                    <button
-                      aria-label="get started button"
-                      className="flex rounded-full justify-center bg-black px-7.5 min-w-[147px] w-full md:w-[30%] py-2.5 text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
-                    >
-                      Get Started
-                    </button>
+                    /> */}
+                    <Link href="/support">
+                      <button
+                        aria-label="get started button"
+                        className="flex rounded-full justify-center bg-black px-7.5 min-w-[147px] w-full md:w-[30%] py-2.5 text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
+                      >
+                        Learn More
+                      </button>
+                    </Link>
                   </div>
                 </form>
               </div>
@@ -78,13 +81,13 @@ const Hero = () => {
                 <div className="relative aspect-[700/444] w-full">
                   <Image
                     className="shadow-solid-l dark:hidden"
-                    src="/images/hero/hero-light.svg"
+                    src="/images/hero/hero-light-1.svg"
                     alt="Hero"
                     fill
                   />
                   <Image
                     className="hidden shadow-solid-l dark:block"
-                    src="/images/hero/hero-dark.svg"
+                    src="/images/hero/hero-light-1.svg"
                     alt="Hero"
                     fill
                   />

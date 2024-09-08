@@ -17,6 +17,7 @@ const menuData: Menu[] = [
     id: 3,
     title: "Coding Courses",
     newTab: false,
+    path: "/#courses",
     submenu: [
       {
         id: 31,
@@ -119,14 +120,14 @@ const menuData: Menu[] = [
       {
         id: 31,
         title: "WhatsApp",
-        newTab: false,
-        path: "",
+        newTab: true,
+        path: "https://wa.me/919876543210?text=Hi%2C%20I%20am%20interested%20in%20your%20courses",
       },
       {
         id: 34,
         title: "Call Us",
-        newTab: false,
-        path: "",
+        newTab: true,
+        path: "tel:+919019711468",
       },
       {
         id: 36,
