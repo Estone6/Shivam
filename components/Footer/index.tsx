@@ -214,14 +214,9 @@ const Footer = () => {
             >
               <ul className="flex items-center gap-8">
                 <li>
-                  <a href="#" className="hover:text-primary">
+                  <span className="hover:text-primary">
                     English
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-primary">
-                    Support
-                  </a>
+                  </span>
                 </li>
               </ul>
             </motion.div>
