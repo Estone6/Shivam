@@ -312,7 +312,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a target="_blank" href="https://www.instagram.com/techunicornacademy/" aria-label="social icon">
+                  <a target="_blank" href="https://www.linkedin.com/company/tech-unicorn-academy/" aria-label="social icon">
                     <svg
                       className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
                       width="24"
