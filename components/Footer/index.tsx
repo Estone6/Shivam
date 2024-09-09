@@ -240,7 +240,7 @@ const Footer = () => {
               className="animate_top"
             >
               <p>
-                &copy; {new Date().getFullYear()} Solid. All rights reserved
+                &copy; {new Date().getFullYear()} Tech Unicorn Academy. All rights reserved
               </p>
             </motion.div>
 
