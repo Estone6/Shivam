@@ -243,7 +243,7 @@ const Contact: React.FC = () => {
                   Email Address
                 </h3>
                 <p>
-                  <a href="mailto:hr@techunicornacademy.com">hr@techunicornacademy.com</a>
+                  <a href="mailto:enquiry@techunicornacademy.com">enquiry@techunicornacademy.com</a>
                 </p>
               </div>
               <div>
