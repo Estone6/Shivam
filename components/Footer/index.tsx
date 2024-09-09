@@ -136,7 +136,7 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        href="https://wa.me/919876543210?text=Hi%2C%20I%20am%20interested%20in%20your%20courses"
+                        href="https://wa.me/9174859935?text=Hi%2C%20I%20am%20interested%20in%20your%20courses"
                         className="mb-3 inline-block hover:text-primary"
                       >
                         WhatsApp
@@ -144,7 +144,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="tel:+919019711468"
+                        href="tel:+91-9174859935"
                         className="mb-3 inline-block hover:text-primary"
                       >
                         Call Us

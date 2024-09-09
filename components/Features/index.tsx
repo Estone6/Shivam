@@ -13,9 +13,9 @@ const Feature = () => {
           {/* <!-- Section Title Start --> */}
           <SectionHeader
             headerInfo={{
-              title: "TECH UNICORN FEATURES",
+              title: "TECH UNICORN ACADEMY FEATURES",
               subtitle: "Our Core Features",
-              description: `Discover what makes Tech Unicorn the best choice for your IT education and career growth.`,
+              description: `Discover what makes Tech Unicorn Academy the best choice for your IT education and career growth.`,
             }}
           />
           {/* <!-- Section Title End --> */}

@@ -1,15 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const Hero = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <>
       <section className="overflow-hidden pb-20 pt-35 md:pt-40 xl:pb-25 xl:pt-46">
@@ -23,8 +16,8 @@ const Hero = () => {
               </h4>
               <h1 className="mb-5 pr-0 lg:pr-16 text-3xl font-bold text-black dark:text-white xl:text-hero ">
                 Unlock your potential with{" "}
-                <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark ">
-                  Tech Unicorn
+                <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full">
+                  Tech Unicorn Academy
                 </span>
               </h1>
               <p>
@@ -32,25 +25,23 @@ const Hero = () => {
               </p>
 
               <div className="mt-10">
-                <form onSubmit={handleSubmit}>
-                  <div className="flex flex-col gap-5 md:flex-row md:justify-between">
-                    {/* <input
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      type="text"
-                      placeholder="Enter your email address"
-                      className="rounded-full border border-stroke w-full md:w-[60%] px-6 py-2.5 shadow-solid-2 focus:border-primary focus:outline-none dark:border-strokedark dark:bg-black dark:shadow-none dark:focus:border-primary"
-                    /> */}
+                <div className="flex flex-col gap-4 md:flex-row md:justify-between items-center">
+                  <div className="w-full md:w-1/2 min-w-[265px]">
+                    <span className="mr-2 inline-flex rounded-full bg-meta px-4.5 py-1 text-lg font-bold uppercase text-white ">
+                  100%
+                </span> <span className="text-lg font-bold text-black dark:text-white">Placement guarantee</span>
+                  </div>
+                  <div className="w-full md:w-1/2 flex justify-center items-center">
                     <Link href="/support">
                       <button
                         aria-label="get started button"
-                        className="flex rounded-full justify-center bg-black px-7.5 min-w-[147px] w-full md:w-[30%] py-2.5 text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
+                        className="flex rounded-full justify-center bg-black px-7.5 min-w-[147px] w-full py-2.5 text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
                       >
                         Learn More
                       </button>
                     </Link>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
 

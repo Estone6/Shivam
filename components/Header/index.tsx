@@ -8,7 +8,7 @@ import menuData from "./menuData";
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
-  const [dropdownToggler, setDropdownToggler] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null); // Track the active dropdown index
   const [stickyMenu, setStickyMenu] = useState(false);
 
   const pathUrl = usePathname();
@@ -23,8 +23,21 @@ const Header = () => {
   };
 
   useEffect(() => {
+    handleStickyMenu();
     window.addEventListener("scroll", handleStickyMenu);
-  });
+    return () => window.removeEventListener("scroll", handleStickyMenu); // Clean up the event listener
+  }, []);
+
+  // Toggle dropdown for each menu
+  const toggleDropdown = (index: number) => {
+    setActiveDropdown((prevIndex) => (prevIndex === index ? null : index)); // Open only the clicked dropdown and close others
+  };
+
+  // Close the dropdown on any valid click
+  const closeDropdowns = () => {
+    setActiveDropdown(null);
+    setNavigationOpen(false);
+  };
 
   return (
     <header
@@ -36,13 +49,14 @@ const Header = () => {
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <div className="flex justify-center items-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <a href="/">
               <Image
                 src="/images/logo/logo-header.png"
                 alt="logo"
                 width={119.03}
                 height={30}
+                style={{ width: 'auto', height: '50px' }}
                 className="hidden w-full dark:block"
               />
               <Image
@@ -50,12 +64,19 @@ const Header = () => {
                 alt="logo"
                 width={119.03}
                 height={30}
+                style={{ width: 'auto', height: '50px' }}
                 className="w-full dark:hidden"
               />
             </a>
-            <div className="text-black dark:text-white text-2xl font-semibold"><a href="/">TechUnicorn</a></div>
+            <div className="text-xl leading-[1.125rem] font-semibold text-black dark:text-white">
+              <a href="/">
+                <div>Tech Unicorn</div>
+                <hr className="border mt-1 mb-1 border-slate-500" />
+                <div className="text-center">Academy</div>
+              </a>
+            </div>
           </div>
-          
+
           {/* <!-- Hamburger Toggle BTN --> */}
           <button
             aria-label="hamburger Toggler"
@@ -97,7 +118,7 @@ const Header = () => {
           {/* <!-- Hamburger Toggle BTN --> */}
         </div>
 
-        {/* Nav Menu Start   */}
+        {/* Nav Menu Start */}
         <div
           className={`invisible h-0 w-full items-center justify-between xl:visible xl:flex xl:h-auto xl:w-full ${
             navigationOpen &&
@@ -111,7 +132,7 @@ const Header = () => {
                   {menuItem.submenu ? (
                     <>
                       <button
-                        onClick={() => setDropdownToggler(!dropdownToggler)}
+                        onClick={() => toggleDropdown(key)}
                         className="flex cursor-pointer items-center justify-between gap-3 hover:text-primary"
                       >
                         {menuItem.title}
@@ -127,10 +148,16 @@ const Header = () => {
                       </button>
 
                       <ul
-                        className={`dropdown ${dropdownToggler ? "flex" : ""}`}
+                        className={`dropdown ${
+                          activeDropdown === key ? "flex" : ""
+                        }`}
                       >
-                        {menuItem.submenu.map((item, key) => (
-                          <li key={key} className="hover:text-primary">
+                        {menuItem.submenu.map((item, subkey) => (
+                          <li
+                            key={subkey}
+                            className="hover:text-primary"
+                            onClick={closeDropdowns} // Close on submenu click
+                          >
                             <Link href={item.path || "#"}>{item.title}</Link>
                           </li>
                         ))}
@@ -144,6 +171,7 @@ const Header = () => {
                           ? "text-primary hover:text-primary"
                           : "hover:text-primary"
                       }
+                      onClick={closeDropdowns} // Close on non-expandable menu click
                     >
                       {menuItem.title}
                     </Link>
@@ -154,11 +182,12 @@ const Header = () => {
           </nav>
 
           <div className="mt-7 flex items-center gap-6 xl:mt-0">
-            <ThemeToggler />
+            <ThemeToggler onToggle={closeDropdowns} />
 
             <Link
               href="/support"
               className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
+              onClick={closeDropdowns} // Close on contact button click
             >
               Book Demo Classes
             </Link>
@@ -168,7 +197,5 @@ const Header = () => {
     </header>
   );
 };
-
-// w-full delay-300
 
 export default Header;

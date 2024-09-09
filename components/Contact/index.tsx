@@ -1,41 +1,93 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React, { useState } from "react";
-import emailjs from 'emailjs-com';
+import React, { useState, useEffect, useRef } from "react";
+import emailjs from "emailjs-com";
 
-const Contact = () => {
-  const [hasMounted, setHasMounted] = React.useState(false);
-  const [formData, setFormData] = useState({
+// Define the type for form data
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  phone: string;
+  message: string;
+}
+
+const Contact: React.FC = () => {
+  const [hasMounted, setHasMounted] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     subject: '',
     phone: '',
     message: '',
   });
+  const [responseMessage, setResponseMessage] = useState<string>('');
 
-  const [responseMessage, setResponseMessage] = useState('');
+  // Refs for input elements to set custom validity messages
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const subjectRef = useRef<HTMLInputElement | null>(null);
+  const phoneRef = useRef<HTMLInputElement | null>(null);
+  const messageRef = useRef<HTMLTextAreaElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
+
   if (!hasMounted) {
     return null;
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Clear custom validity message when user modifies the input
+    e.target.setCustomValidity('');
   };
 
-  const handleSubmit = async (e) => {
+  const validateForm = () => {
+    // Custom validation logic
+    if (nameRef.current && !formData.name) {
+      nameRef.current.setCustomValidity('Full name is required');
+    }
+    if (emailRef.current && !formData.email) {
+      emailRef.current.setCustomValidity('Email address is required');
+    } else if (emailRef.current && !emailRef.current.validity.valid) {
+      emailRef.current.setCustomValidity('Please enter a valid email address');
+    }
+    if (subjectRef.current && !formData.subject) {
+      subjectRef.current.setCustomValidity('Subject is required');
+    }
+    if (phoneRef.current && !formData.phone) {
+      phoneRef.current.setCustomValidity('Phone number is required');
+    } else if (phoneRef.current && !phoneRef.current.validity.valid) {
+      phoneRef.current.setCustomValidity('Please enter a valid Indian phone number (10 digits starting with 6, 7, 8, or 9)');
+    }
+    if (messageRef.current && !formData.message) {
+      messageRef.current.setCustomValidity('Message is required');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    validateForm();
+
+    // Check if the form is valid before submitting
+    const formElement = e.currentTarget as HTMLFormElement;
+    if (!formElement.checkValidity()) {
+      formElement.reportValidity(); // Trigger browser's built-in validation UI
+      return;
+    }
 
     // Use EmailJS to send the email
     emailjs
       .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Replace with your EmailJS Service ID
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Replace with your EmailJS Template ID
-        formData,
+        formData as any,
         process.env.NEXT_PUBLIC_EMAILJS_USER_ID! // Replace with your EmailJS User ID
       )
       .then(
@@ -73,15 +125,8 @@ const Contact = () => {
           <div className="flex flex-col-reverse flex-wrap gap-8 md:flex-row md:flex-nowrap md:justify-between xl:gap-20">
             <motion.div
               variants={{
-                hidden: {
-                  opacity: 0,
-                  y: -20,
-                },
-
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                },
+                hidden: { opacity: 0, y: -20 },
+                visible: { opacity: 1, y: 0 },
               }}
               initial="hidden"
               whileInView="visible"
@@ -93,89 +138,86 @@ const Contact = () => {
                 Send a message
               </h2>
 
-              <form onSubmit={handleSubmit}>
-              {/* Update input fields to include name attribute and handleChange function */}
-              <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Full name"
-                  required
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                />
+              <form onSubmit={handleSubmit} noValidate>
+                <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Full name"
+                    required
+                    ref={nameRef}
+                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none lg:w-1/2"
+                  />
 
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email address"
-                  required
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                />
-              </div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email address"
+                    required
+                    ref={emailRef}
+                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none lg:w-1/2"
+                  />
+                </div>
 
-              <div className="mb-12.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Subject"
-                  required
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                />
+                <div className="mb-12.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                    required
+                    ref={subjectRef}
+                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none lg:w-1/2"
+                  />
 
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Phone number"
-                  required
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                />
-              </div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone number"
+                    pattern="[6-9]{1}[0-9]{9}" // Pattern for Indian mobile numbers
+                    required
+                    ref={phoneRef}
+                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none lg:w-1/2"
+                  />
+                </div>
 
-              <div className="mb-11.5 flex">
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Message"
-                  rows={4}
-                  required
-                  className="w-full border-b border-stroke bg-transparent focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white"
-                ></textarea>
-              </div>
+                <div className="mb-11.5 flex">
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Message"
+                    rows={4}
+                    required
+                    ref={messageRef}
+                    className="w-full border-b border-stroke bg-transparent focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white"
+                  ></textarea>
+                </div>
 
-              {/* Checkbox and Submit button */}
-              <div className="flex flex-wrap gap-4 xl:justify-between ">
-                <button
-                  aria-label="send message"
-                  type="submit"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
-            {responseMessage && <p>{responseMessage}</p>}
+                <div className="flex flex-wrap gap-4 xl:justify-between">
+                  <button
+                    aria-label="send message"
+                    type="submit"
+                    className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
+              {responseMessage && <p>{responseMessage}</p>}
             </motion.div>
 
             <motion.div
               variants={{
-                hidden: {
-                  opacity: 0,
-                  y: -20,
-                },
-
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                },
+                hidden: { opacity: 0, y: -20 },
+                visible: { opacity: 1, y: 0 },
               }}
               initial="hidden"
               whileInView="visible"
@@ -189,7 +231,7 @@ const Contact = () => {
 
               <div className="5 mb-7">
                 <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Our Loaction
+                  Our Location
                 </h3>
                 <p>
                   <a href="https://maps.app.goo.gl/1P47pDStxNbVakrHA">2nd Floor, 226, in front of Books N Books, Zone-II, Maharana Pratap Nagar, Bhopal, Madhya Pradesh 462021</a>
@@ -210,6 +252,9 @@ const Contact = () => {
                 </h4>
                 <p>
                   <a href="tel:+91-9174859935">+91-9174859935</a>
+                </p>
+                <p>
+                  <a href="tel:+91-7554514721">+91-7554514721</a>
                 </p>
               </div>
             </motion.div>

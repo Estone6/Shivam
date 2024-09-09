@@ -13,7 +13,7 @@ const Courses = () => {
           {/* <!-- Section Title Start --> */}
           <SectionHeader
             headerInfo={{
-              title: "TECH UNICORN COURSES",
+              title: "TECH UNICORN ACADEMY COURSES",
               subtitle: "Our Popular Courses",
               description: `Explore our range of coding and non-coding courses designed to boost your career in the tech industry.`,
             }}
