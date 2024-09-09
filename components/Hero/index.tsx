@@ -12,7 +12,7 @@ const Hero = () => {
             {/* Text content */}
             <div className="w-full lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
               <h4 className="mb-4.5 text-lg font-medium text-black dark:text-white">
-                🔥 A Complete Training and Career Guide
+                🔥 A Complete Training and Placement Guide
               </h4>
               <h1 className="mb-5 pr-0 lg:pr-16 text-3xl font-bold text-black dark:text-white xl:text-hero ">
                 Unlock your potential with{" "}
