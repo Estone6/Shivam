@@ -234,9 +234,9 @@ const Contact: React.FC = () => {
                   Our Location
                 </h3>
                 <p>
-                  <a href="https://maps.app.goo.gl/1P47pDStxNbVakrHA">2nd Floor, 226, in front of Books N Books, Zone-II, Maharana Pratap Nagar, Bhopal, Madhya Pradesh 462021</a>
+                  <a href="https://maps.app.goo.gl/uFBQDiaRs7cmxq7e7">B-359, 2nd Floor, B Sector, Sarvdharm Colony, Kolar Rd, Bhopal, Madhya Pradesh 462042</a>
                 </p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.422003422197!2d77.43416437576288!3d23.227725779030532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x44f732f4e21b7a7f%3A0xfcb34b3ba8d75d5f!2sTech%20Unicorn%20Academy!5e0!3m2!1sen!2sin!4v1725765963759!5m2!1sen!2sin" width="" height="" style={{ border:0 }} allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2712.9417308862467!2d77.41832943632126!3d23.186535252494753!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c43a77f187601%3A0x87d71252cf88e2f5!2sFour%20Seasons%20Ayurveda!5e0!3m2!1sen!2sin!4v1763347315816!5m2!1sen!2sin" width="" height="" style={{ border:0 }} allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
               </div>
               <div className="5 mb-7">
                 <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
